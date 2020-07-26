@@ -7,6 +7,6 @@ describe('Square', () => {
   it('has a text input', () => {
     const thing = renderer.create(<Square />)
 
-    expect(thing.toJSON().type).toEqual(expect.stringContaining('TextInput'))
+    expect(thing.toJSON()?.type).toEqual(expect.stringContaining('TextInput'))
   })
 })

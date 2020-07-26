@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 
-StyleSheet
+const styles = StyleSheet.create({ container: {backgroundColor: 'pink'}})
 
 export const Square = () => {
-  return <TextInput>Square</TextInput>
+  return <TextInput style={styles.container} placeholder='hi' />
 }
