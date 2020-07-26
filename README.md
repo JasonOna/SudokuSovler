@@ -1,6 +1,6 @@
 # Sudoku Solver
 
-* Solves sudoku puzzles on Mobile, and Web
+* Solves sudoku puzzles on Mobile and Web
 
 # Notes
 
@@ -43,7 +43,9 @@ So row 1 will consist of positions:
 
 ### Square
 
-Handles input from user
+* Handles input from user
+* Displays results
+
 
 Square {
   position: number
@@ -53,4 +55,3 @@ Square {
 ### Board
 
 Manages state of 91 squares and passes data to Solver when submitted
-
