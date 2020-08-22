@@ -18,7 +18,7 @@ const sudokuStyles = {
   Board: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    width: 180,
+    width: 270,
   } as ViewProps,
 } 
 
@@ -29,6 +29,7 @@ const isValidInput = (text: string): boolean => {
 }
 
 export const SudokuSolver: React.FunctionComponent = () => {
+  const [message, setMessage] = useState<string>('')
   const [digits, setDigits] = useState<Digit[]>(initialDigits)
 
   const updateDigit = (position: Positions, value: string) => {
@@ -51,17 +52,24 @@ export const SudokuSolver: React.FunctionComponent = () => {
       .join('')
 
     const solution = FindSolution(currentValues)
+
+    if (!solution) {
+      return setMessage('No solution')
+    }
+
     const solvedDigits = ParseSolution(solution)
 
     setDigits(solvedDigits)
   }
 
   const clear = () => {
+    setMessage('')
     setDigits(initialDigits)
   }
 
   return (
     <View style={styles.Container}>
+      <Text>{message}</Text>
       <View style={styles.Board}>
         {validPositions.map((position, index) => {
           return <Square key={index}  callback={(text) => updateDigit(position, text)} value={getDigit(position).value} />

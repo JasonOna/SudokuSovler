@@ -1,8 +1,18 @@
 import React from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { StyleSheet, TextInput, ViewProps } from 'react-native';
 import { Values } from '../../types'
 
-const styles = StyleSheet.create({ container: {backgroundColor: 'pink', borderWidth: 1, width: 20, height: 20, alignItems: 'center', textAlign: 'center'}})
+const squareStyles = {
+  Container: {
+    alignItems: 'center',
+    borderWidth: 1,
+    height: 30,
+    textAlign: 'center',
+    width: 30,
+  } as ViewProps
+}
+
+const styles = StyleSheet.create(squareStyles)
 
 type Props = {
   value: Values
@@ -12,5 +22,5 @@ type Props = {
 export const Square: React.FunctionComponent<Props> = (props: Props) => {
   const {callback, value} = props
 
-  return <TextInput style={styles.container} placeholder='' onChangeText={callback} value={value} />
+  return <TextInput style={styles.Container} placeholder='' onChangeText={callback} value={value} />
 }

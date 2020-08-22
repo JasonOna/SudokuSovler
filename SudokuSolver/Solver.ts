@@ -6,8 +6,12 @@ export type Solution = {
   number: number,
 }
 
-export const FindSolution = (input: string): string => {
+export const FindSolution = (input: string): string | null => {
   const response = solveString(input)[0]
+
+  if (!response) {
+    return null
+  }
 
   return ParseResponse(response)
 }
