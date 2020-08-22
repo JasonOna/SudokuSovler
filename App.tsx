@@ -3,13 +3,15 @@ import { StyleSheet, View } from 'react-native';
 
 import { SudokuSolver } from './SudokuSolver/index'
 
-export default function App() {
+const App: React.FunctionComponent = () => {
   return (
     <View style={styles.container}>
       <SudokuSolver />
     </View>
   );
 }
+
+export default App; 
 
 const styles = StyleSheet.create({
   container: {
