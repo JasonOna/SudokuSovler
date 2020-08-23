@@ -22,5 +22,5 @@ type Props = {
 export const Square: React.FunctionComponent<Props> = (props: Props) => {
   const {callback, value} = props
 
-  return <TextInput style={styles.Container} placeholder='' onChangeText={callback} value={value} />
+  return <TextInput keyboardType='numeric' maxLength={1} style={styles.Container} placeholder='' onChangeText={callback} value={value} />
 }

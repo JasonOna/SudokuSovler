@@ -1,11 +1,17 @@
 import React, {useState } from 'react';
-import { StyleSheet, View, TouchableHighlight, Text, ViewProps } from 'react-native';
+import { StyleSheet, View, TouchableHighlight, Text, ViewProps, TextProps } from 'react-native';
 
 import { Square } from './components/Square'
 import { FindSolution } from './Solver';
 import { ParseSolution } from './Parser';
 
 import { validValues, Values, validPositions, Positions, Digit, initialDigits } from './types'
+
+const MESSAGES = {
+  START: "Input your sudoku board and press 'Submit'\n for awesomeness",
+  ERROR: 'No solution',
+  SOLVED: 'Here you go my friend'
+}
 
 const sudokuStyles = {
   Container: {
@@ -20,6 +26,17 @@ const sudokuStyles = {
     flexWrap: 'wrap',
     width: 270,
   } as ViewProps,
+  Buttons: {
+    alignItems: 'center',
+    borderWidth: 1,
+    margin: 5,
+    padding: 5,
+    width: 140,
+  } as ViewProps,
+  Message: {
+    height: 40,
+    textAlign: 'center',
+  } as TextProps
 } 
 
 const styles = StyleSheet.create(sudokuStyles)
@@ -29,7 +46,7 @@ const isValidInput = (text: string): boolean => {
 }
 
 export const SudokuSolver: React.FunctionComponent = () => {
-  const [message, setMessage] = useState<string>('')
+  const [message, setMessage] = useState<string>(MESSAGES.START)
   const [digits, setDigits] = useState<Digit[]>(initialDigits)
 
   const updateDigit = (position: Positions, value: string) => {
@@ -54,29 +71,30 @@ export const SudokuSolver: React.FunctionComponent = () => {
     const solution = FindSolution(currentValues)
 
     if (!solution) {
-      return setMessage('No solution')
+      return setMessage(MESSAGES.ERROR)
     }
 
+    setMessage(MESSAGES.SOLVED)
     const solvedDigits = ParseSolution(solution)
 
     setDigits(solvedDigits)
   }
 
   const clear = () => {
-    setMessage('')
+    setMessage(MESSAGES.START)
     setDigits(initialDigits)
   }
 
   return (
     <View style={styles.Container}>
-      <Text>{message}</Text>
+      <Text style={styles.Message}>{message}</Text>
       <View style={styles.Board}>
         {validPositions.map((position, index) => {
           return <Square key={index}  callback={(text) => updateDigit(position, text)} value={getDigit(position).value} />
         })}
       </View>
-      <TouchableHighlight onPress={submit}><Text>Submit</Text></TouchableHighlight>
-      <TouchableHighlight onPress={clear}><Text>Clear</Text></TouchableHighlight>
+      <TouchableHighlight style={styles.Buttons} onPress={submit}><Text>Submit</Text></TouchableHighlight>
+      <TouchableHighlight style={styles.Buttons} onPress={clear}><Text>Clear</Text></TouchableHighlight>
     </View>
   )
 }

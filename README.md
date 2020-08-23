@@ -55,3 +55,14 @@ Square {
 ### Board
 
 Manages state of 91 squares and passes data to Solver when submitted
+
+### Digit
+
+This is a square with input
+
+### Adding image recognition
+
+* https://aishack.in/tutorials/sudoku-grabber-opencv-plot/
+
+This article might be good in learning how convert images of sudoku puzzles
+to input for out app
